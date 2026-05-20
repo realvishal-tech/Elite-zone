@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Batch — Elite Zone</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/batch-detail.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">⚡</div>
+    Elite<span>Zone</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="batches.html">Batches</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="admin.html" data-admin-link style="display:none;color:var(--pulse)">Admin</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="batches.html" class="btn btn-glass btn-sm">← All Batches</a>
+  </div>
+  <button class="nav-burger"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page-main">
+<div class="container">
+
+  <!-- BATCH HERO -->
+  <div class="batch-hero">
+    <div class="batch-hero-bg" id="batch-hero-bg-el"></div>
+    <div class="batch-hero-inner">
+      <div class="batch-hero-left">
+
+        <!-- BREADCRUMB -->
+        <div class="batch-breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="sep">/</span>
+          <a href="batches.html">Batches</a>
+          <span class="sep">/</span>
+          <span class="current" id="batch-breadcrumb-name">Loading...</span>
+        </div>
+
+        <!-- BADGES -->
+        <div style="display:flex;gap:0.6rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+          <span class="badge badge-plasma" id="batch-level">—</span>
+          <span class="badge badge-neon">🕒 <span id="batch-duration">—</span></span>
+          <span class="badge badge-gold">Free Access</span>
+        </div>
+
+        <!-- TITLE -->
+        <h1 class="batch-title" id="batch-title">Loading...</h1>
+
+        <!-- MENTOR -->
+        <div class="batch-mentor-row">
+          <div class="mentor-avatar" id="mentor-initials">—</div>
+          <div>
+            <div class="mentor-name" id="batch-mentor-name">Loading...</div>
+            <div class="mentor-role">Senior Developer & Educator</div>
+          </div>
+        </div>
+
+        <!-- DESC -->
+        <p class="batch-desc-text" id="batch-desc">Loading...</p>
+
+        <!-- QUICK STATS -->
+        <div class="batch-quick-stats">
+          <div class="bqs-item">📹 <strong id="batch-video-count">—</strong></div>
+          <div class="bqs-item">📄 <strong id="batch-notes-count">—</strong></div>
+          <div class="bqs-item">🧩 <strong id="batch-dpp-count">—</strong></div>
+          <div class="bqs-item">📊 <strong id="batch-tests-count">—</strong></div>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div style="margin-top:1.5rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+            <span style="font-size:0.78rem;color:var(--text-muted);">Your Progress</span>
+            <span style="font-size:0.78rem;color:var(--plasma-light);font-weight:600;" id="batch-progress-label">0% Complete</span>
+          </div>
+          <div class="progress-bar" style="height:6px;">
+            <div class="progress-fill" id="batch-progress-fill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="batch-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-preview">
+            <div class="sidebar-preview-bg" id="sidebar-batch-bg"></div>
+            <div class="sidebar-preview-icon" id="sidebar-batch-emoji" style="font-size:4rem;position:relative;z-index:1;">⚡</div>
+          </div>
+          <div class="sidebar-body">
+            <button class="sidebar-enroll-btn" id="enroll-btn" onclick="enrollBatch(window._batchId)">🚀 Enroll for Free</button>
+            <a href="dashboard.html" class="btn btn-glass" style="width:100%;justify-content:center;">📊 Go to Dashboard</a>
+            <div class="sidebar-includes">
+              <h4>This Batch Includes</h4>
+              <div class="si-item"><span class="si-icon">✅</span> HD Video Lectures</div>
+              <div class="si-item"><span class="si-icon">✅</span> Downloadable PDF Notes</div>
+              <div class="si-item"><span class="si-icon">✅</span> Practice DPP Sheets</div>
+              <div class="si-item"><span class="si-icon">✅</span> Timed MCQ & Coding Tests</div>
+              <div class="si-item"><span class="si-icon">✅</span> Career Roadmap</div>
+              <div class="si-item"><span class="si-icon">✅</span> Community Support</div>
+              <div class="si-item"><span class="si-icon">✅</span> Completion Certificate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="batch-tabs" style="margin-top:2rem;">
+    <button class="batch-tab active" data-tab="videos">🎬 Videos</button>
+    <button class="batch-tab" data-tab="notes">📄 Notes</button>
+    <button class="batch-tab" data-tab="dpp">🧩 DPP</button>
+    <button class="batch-tab" data-tab="tests">📊 Tests</button>
+    <button class="batch-tab" data-tab="roadmap">🗺️ Roadmap</button>
+    <button class="batch-tab" data-tab="resources">📦 Resources</button>
+  </div>
+
+  <!-- PANELS -->
+  <div id="panel-videos" class="tab-panel active">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">📹 Video Lectures</h3>
+      <button class="btn btn-glass btn-sm" onclick="Toast.show('All progress saved automatically!','info')">💾 Auto-saved</button>
+    </div>
+    <div class="video-grid" id="video-list">
+      <div style="text-align:center;padding:3rem;color:var(--text-muted);">Loading videos...</div>
+    </div>
+  </div>
+
+  <div id="panel-notes" class="tab-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">📄 Study Notes</h3>
+      <button class="btn btn-primary btn-sm" onclick="downloadNote('All Notes Bundle')">⬇ Download All</button>
+    </div>
+    <div class="notes-grid" id="notes-grid">
+      <div style="text-align:center;padding:3rem;color:var(--text-muted);">Loading notes...</div>
+    </div>
+  </div>
+
+  <div id="panel-dpp" class="tab-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">🧩 Daily Practice Problems</h3>
+      <span class="badge badge-neon">Submit your answers</span>
+    </div>
+    <div class="dpp-list" id="dpp-list">
+      <div style="text-align:center;padding:3rem;color:var(--text-muted);">Loading DPPs...</div>
+    </div>
+  </div>
+
+  <div id="panel-tests" class="tab-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">📊 Tests & Quizzes</h3>
+      <span class="badge badge-pulse">Timed Tests</span>
+    </div>
+    <div id="tests-list">
+      <div style="text-align:center;padding:3rem;color:var(--text-muted);">Loading tests...</div>
+    </div>
+  </div>
+
+  <div id="panel-roadmap" class="tab-panel">
+    <div style="margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">🗺️ Learning Roadmap</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.4rem;">Follow this structured path to master the batch completely.</p>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:1.75rem;">
+      <div id="roadmap-container">Loading roadmap...</div>
+    </div>
+  </div>
+
+  <div id="panel-resources" class="tab-panel">
+    <div style="margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">📦 Additional Resources</h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;">
+      <div class="note-card" style="cursor:pointer;" onclick="Toast.show('Source code downloading...','success')">
+        <div class="note-icon">💾</div>
+        <div class="note-name">Source Code</div>
+        <div class="note-size">All lecture source files</div>
+        <button class="btn btn-glass btn-sm" style="width:100%;justify-content:center;margin-top:0.5rem;">⬇ Download</button>
+      </div>
+      <div class="note-card" style="cursor:pointer;" onclick="Toast.show('Cheat sheet downloading...','success')">
+        <div class="note-icon">📋</div>
+        <div class="note-name">Cheat Sheet</div>
+        <div class="note-size">Quick reference · PDF</div>
+        <button class="btn btn-glass btn-sm" style="width:100%;justify-content:center;margin-top:0.5rem;">⬇ Download</button>
+      </div>
+      <div class="note-card" style="cursor:pointer;" onclick="Toast.show('Interview questions downloading...','success')">
+        <div class="note-icon">🎯</div>
+        <div class="note-name">Interview Questions</div>
+        <div class="note-size">Top 50 questions · PDF</div>
+        <button class="btn btn-glass btn-sm" style="width:100%;justify-content:center;margin-top:0.5rem;">⬇ Download</button>
+      </div>
+      <div class="note-card" style="cursor:pointer;" onclick="Toast.show('Project files downloading...','success')">
+        <div class="note-icon">🚀</div>
+        <div class="note-name">Project Files</div>
+        <div class="note-size">Complete project · ZIP</div>
+        <button class="btn btn-glass btn-sm" style="width:100%;justify-content:center;margin-top:0.5rem;">⬇ Download</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:3rem;"></div>
+
+</div>
+</main>
+
+<footer>
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+    <a href="index.html" class="nav-logo" style="display:inline-flex;"><div class="nav-logo-icon">⚡</div>Elite<span>Zone</span></a>
+    <div style="display:flex;gap:1rem;">
+      <a href="batches.html" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;">All Batches</a>
+      <a href="community.html" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;">Community</a>
+      <a href="dashboard.html" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;">Dashboard</a>
+    </div>
+    <span style="font-size:0.78rem;color:var(--text-muted);">Built with ❤️ by Vishal Kumar</span>
+  </div>
+</footer>
+
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="index.html" class="mob-nav-item"><div class="icon">🏠</div>Home</a>
+    <a href="batches.html" class="mob-nav-item active"><div class="icon">📚</div>Batches</a>
+    <a href="community.html" class="mob-nav-item"><div class="icon">💬</div>Community</a>
+    <a href="dashboard.html" class="mob-nav-item"><div class="icon">📊</div>Dashboard</a>
+    <a href="#" onclick="Registration.showModal(true)" class="mob-nav-item"><div class="icon">👤</div>Profile</a>
+  </div>
+</nav>
+
+<script src="js/main.js"></script>
+<script src="js/batch-detail.js"></script>
+<script>
+  // Store batch id for enroll button
+  window._batchId = null;
+  document.addEventListener('DOMContentLoaded', () => {
+    const p = new URLSearchParams(window.location.search);
+    const b = getBatch(p.get('batch'));
+    if (b) {
+      window._batchId = b.id;
+      const mi = document.getElementById('mentor-initials');
+      if (mi) mi.textContent = (getBatch(b.id)?.name||'??').slice(0,2).toUpperCase();
+    }
+  });
+</script>
+</body>
+</html>

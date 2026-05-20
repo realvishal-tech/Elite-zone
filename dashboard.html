@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Elite Zone</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">⚡</div>
+    Elite<span>Zone</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="batches.html">Batches</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+    <li><a href="admin.html" data-admin-link style="display:none;color:var(--pulse)">Admin</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="batches.html" class="btn btn-primary btn-sm">+ Enroll</a>
+  </div>
+  <button class="nav-burger"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page-main">
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar">
+    <div class="dash-profile">
+      <div class="dash-avatar" id="dash-avatar">EZ</div>
+      <div class="dash-name" id="dash-name">Loading...</div>
+      <div class="dash-roll" id="dash-roll">BCA Student</div>
+      <div class="dash-xp">
+        <div class="dash-xp-header">
+          <span class="dash-xp-label">XP Progress</span>
+          <span class="dash-xp-val" id="dash-xp-val">0 XP</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="dash-xp-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="dash-nav">
+      <div class="dash-nav-section">Overview</div>
+      <button class="dash-nav-item active" data-section="overview">
+        <span class="dash-nav-icon">📊</span> Dashboard
+      </button>
+      <button class="dash-nav-item" data-section="enrolled">
+        <span class="dash-nav-icon">📚</span> My Batches
+        <span class="dash-nav-badge" id="enrolled-count">0</span>
+      </button>
+      <button class="dash-nav-item" data-section="progress">
+        <span class="dash-nav-icon">📈</span> Progress
+      </button>
+
+      <div class="dash-nav-section">Achievements</div>
+      <button class="dash-nav-item" data-section="streak">
+        <span class="dash-nav-icon">🔥</span> Streak
+      </button>
+      <button class="dash-nav-item" data-section="leaderboard">
+        <span class="dash-nav-icon">🏆</span> Leaderboard
+      </button>
+      <button class="dash-nav-item" data-section="badges">
+        <span class="dash-nav-icon">🎖️</span> Badges
+      </button>
+
+      <div class="dash-nav-section">Community</div>
+      <a href="community.html" class="dash-nav-item">
+        <span class="dash-nav-icon">💬</span> Community
+      </a>
+      <button class="dash-nav-item" data-section="notifications">
+        <span class="dash-nav-icon">🔔</span> Notifications
+        <span class="dash-nav-badge">3</span>
+      </button>
+
+      <div class="dash-nav-section">Account</div>
+      <button class="dash-nav-item" data-section="profile">
+        <span class="dash-nav-icon">👤</span> Profile
+      </button>
+      <button class="dash-nav-item" onclick="Auth.logout()">
+        <span class="dash-nav-icon">🚪</span> Sign Out
+      </button>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="dash-main">
+
+    <!-- HEADER -->
+    <div class="dash-header">
+      <div>
+        <div class="dash-greeting" id="dash-greeting">Good Morning, Student 👋</div>
+        <div class="dash-date" id="dash-date">Loading date...</div>
+      </div>
+      <div style="display:flex;gap:0.75rem;">
+        <a href="batches.html" class="btn btn-primary btn-sm">🚀 Explore Batches</a>
+      </div>
+    </div>
+
+    <!-- SECTIONS -->
+
+    <!-- OVERVIEW -->
+    <div id="section-overview" class="dash-section">
+
+      <!-- STATS -->
+      <div class="dash-stats" style="margin-bottom:2rem;">
+        <div class="dash-stat-card">
+          <div class="dsc-top">
+            <div class="dsc-icon">📚</div>
+            <span class="dsc-change up">Active</span>
+          </div>
+          <div class="dsc-num" id="stat-enrolled">0</div>
+          <div class="dsc-label">Enrolled Batches</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-top">
+            <div class="dsc-icon">🎬</div>
+            <span class="dsc-change up">+2 today</span>
+          </div>
+          <div class="dsc-num" id="stat-videos">0</div>
+          <div class="dsc-label">Videos Watched</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-top">
+            <div class="dsc-icon">⭐</div>
+            <span class="dsc-change up">Earned</span>
+          </div>
+          <div class="dsc-num" id="stat-xp">0</div>
+          <div class="dsc-label">Total XP</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-top">
+            <div class="dsc-icon">🔥</div>
+            <span class="dsc-change up">Days</span>
+          </div>
+          <div class="dsc-num" id="stat-streak">0</div>
+          <div class="dsc-label">Day Streak</div>
+        </div>
+      </div>
+
+      <!-- STREAK MINI -->
+      <div class="streak-section" style="margin-bottom:2rem;">
+        <div class="streak-top">
+          <div>
+            <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.3rem;">Current Streak</div>
+            <div style="display:flex;align-items:baseline;gap:0.4rem;">
+              <div class="streak-count" id="streak-count">0</div>
+              <div class="streak-label">days</div>
+            </div>
+          </div>
+          <div style="font-size:3rem;" class="streak-fire">🔥</div>
+        </div>
+        <div class="streak-days" id="streak-days">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ENROLLED BATCHES -->
+      <div style="margin-bottom:2rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">📚 My Batches</h3>
+          <a href="batches.html" class="btn btn-glass btn-sm">+ Enroll More</a>
+        </div>
+        <div class="enrolled-grid" id="enrolled-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div style="margin-bottom:2rem;">
+        <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;">⚡ Quick Access</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.85rem;">
+          <a href="batch-detail.html?batch=dsa" style="text-decoration:none;">
+            <div class="dash-stat-card" style="cursor:pointer;transition:all 0.2s;text-align:center;" onmouseover="this.style.borderColor='var(--plasma)'" onmouseout="this.style.borderColor='var(--glass-border)'">
+              <div style="font-size:1.8rem;margin-bottom:0.5rem;">🧩</div>
+              <div style="font-size:0.85rem;font-weight:600;">DSA</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);">120 videos</div>
+            </div>
+          </a>
+          <a href="batch-detail.html?batch=web-development" style="text-decoration:none;">
+            <div class="dash-stat-card" style="cursor:pointer;transition:all 0.2s;text-align:center;" onmouseover="this.style.borderColor='var(--neon)'" onmouseout="this.style.borderColor='var(--glass-border)'">
+              <div style="font-size:1.8rem;margin-bottom:0.5rem;">🕸️</div>
+              <div style="font-size:0.85rem;font-weight:600;">Web Dev</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);">88 videos</div>
+            </div>
+          </a>
+          <a href="batch-detail.html?batch=placement-prep" style="text-decoration:none;">
+            <div class="dash-stat-card" style="cursor:pointer;transition:all 0.2s;text-align:center;" onmouseover="this.style.borderColor='var(--pulse)'" onmouseout="this.style.borderColor='var(--glass-border)'">
+              <div style="font-size:1.8rem;margin-bottom:0.5rem;">🎯</div>
+              <div style="font-size:0.85rem;font-weight:600;">Placement</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);">80 videos</div>
+            </div>
+          </a>
+          <a href="community.html" style="text-decoration:none;">
+            <div class="dash-stat-card" style="cursor:pointer;transition:all 0.2s;text-align:center;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--glass-border)'">
+              <div style="font-size:1.8rem;margin-bottom:0.5rem;">💬</div>
+              <div style="font-size:0.85rem;font-weight:600;">Community</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);">Ask doubts</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENROLLED SECTION -->
+    <div id="section-enrolled" class="dash-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">📚 My Enrolled Batches</h2>
+      <div class="enrolled-grid" id="enrolled-grid-2"><!-- Rendered --></div>
+    </div>
+
+    <!-- PROGRESS SECTION -->
+    <div id="section-progress" class="dash-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">📈 Learning Progress</h2>
+      <div style="background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:1.75rem;">
+        <p style="color:var(--text-secondary);text-align:center;padding:2rem;">
+          Enroll in batches to see your detailed progress here.
+          <br><br>
+          <a href="batches.html" class="btn btn-primary">Explore Batches 🚀</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- STREAK SECTION -->
+    <div id="section-streak" class="dash-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">🔥 Daily Streak</h2>
+      <div class="streak-section">
+        <div class="streak-top">
+          <div>
+            <div style="font-size:0.72rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Current Streak</div>
+            <div style="display:flex;align-items:baseline;gap:0.4rem;">
+              <div class="streak-count" id="streak-count-2">0</div>
+              <div class="streak-label">days 🔥</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;">Best Streak</div>
+            <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--gold);">21 days</div>
+          </div>
+        </div>
+        <div class="streak-days" id="streak-days-full"></div>
+      </div>
+      <div style="margin-top:1.5rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;padding:1.25rem;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">💡</div>
+        <div style="font-weight:600;margin-bottom:0.3rem;">How to maintain your streak?</div>
+        <div style="font-size:0.875rem;color:var(--text-secondary);">Watch at least 1 video every day. Streaks reset at midnight.</div>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD SECTION -->
+    <div id="section-leaderboard" class="dash-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">🏆 Leaderboard</h2>
+      <div class="leaderboard-list" id="leaderboard-list"><!-- Rendered --></div>
+    </div>
+
+    <!-- BADGES SECTION -->
+    <div id="section-badges" class="dash-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">🎖️ Your Badges</h2>
+      <div class="badges-grid" id="badges-grid"><!-- Rendered --></div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div id="section-notifications" class="dash-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">🔔 Notifications</h2>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <div style="display:flex;gap:1rem;align-items:flex-start;padding:1.1rem;background:var(--glass);border:1px solid rgba(108,63,255,0.2);border-radius:12px;">
+          <span style="font-size:1.3rem;flex-shrink:0;">🚀</span>
+          <div><div style="font-weight:600;font-size:0.9rem;margin-bottom:0.2rem;">New batch uploaded: Cloud Computing</div><div style="font-size:0.78rem;color:var(--text-muted);">2 hours ago</div></div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;padding:1.1rem;background:var(--glass);border:1px solid rgba(255,209,102,0.2);border-radius:12px;">
+          <span style="font-size:1.3rem;flex-shrink:0;">🏆</span>
+          <div><div style="font-weight:600;font-size:0.9rem;margin-bottom:0.2rem;">Weekly test scheduled for DSA — this Sunday</div><div style="font-size:0.78rem;color:var(--text-muted);">1 day ago</div></div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;padding:1.1rem;background:var(--glass);border:1px solid rgba(6,255,165,0.2);border-radius:12px;">
+          <span style="font-size:1.3rem;flex-shrink:0;">🔥</span>
+          <div><div style="font-weight:600;font-size:0.9rem;margin-bottom:0.2rem;">You've reached a 3-day streak! Keep going!</div><div style="font-size:0.78rem;color:var(--text-muted);">3 days ago</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE SECTION -->
+    <div id="section-profile" class="dash-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">👤 My Profile</h2>
+      <div style="background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:2rem;max-width:540px;">
+        <div id="profile-content">Loading profile...</div>
+      </div>
+    </div>
+
+  </div><!-- end dash-main -->
+</div><!-- end dashboard-layout -->
+</main>
+
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="index.html" class="mob-nav-item"><div class="icon">🏠</div>Home</a>
+    <a href="batches.html" class="mob-nav-item"><div class="icon">📚</div>Batches</a>
+    <a href="community.html" class="mob-nav-item"><div class="icon">💬</div>Community</a>
+    <a href="dashboard.html" class="mob-nav-item active"><div class="icon">📊</div>Dashboard</a>
+    <a href="#" onclick="Registration.showModal(true)" class="mob-nav-item"><div class="icon">👤</div>Profile</a>
+  </div>
+</nav>
+
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Sync enrolled count
+  const user = Auth.getUser();
+  const ec = document.getElementById('enrolled-count');
+  if (ec && user) ec.textContent = (user.enrolled||[]).length;
+
+  // Render profile section
+  const pc = document.getElementById('profile-content');
+  if (pc && user) {
+    pc.innerHTML = `
+      <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:2rem;">
+        <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--plasma),var(--pulse));
+          display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.8rem;font-weight:800;
+          border:3px solid rgba(108,63,255,0.4);">${user.initials || user.name.slice(0,2).toUpperCase()}</div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;">${user.name}</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">${user.email}</div>
+          <span class="badge badge-plasma" style="margin-top:0.4rem;">${user.role === 'admin' ? '⚙️ Admin' : '🎓 Student'}</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div><div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;">Roll Number</div><div style="font-weight:600;">${user.roll || '—'}</div></div>
+        <div><div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;">Registration No.</div><div style="font-weight:600;">${user.regno || '—'}</div></div>
+        <div><div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;">Semester</div><div style="font-weight:600;">Semester ${user.sem || '—'}</div></div>
+        <div><div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;">College</div><div style="font-weight:600;">${user.college || 'LND College'}</div></div>
+        <div><div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;">Phone</div><div style="font-weight:600;">${user.phone || '—'}</div></div>
+        <div><div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;">XP Points</div><div style="font-weight:600;color:var(--gold);">${user.xp || 0} XP</div></div>
+      </div>
+      <button class="btn btn-glass" style="width:100%;justify-content:center;margin-top:1.5rem;" onclick="Auth.logout()">🚪 Sign Out</button>
+    `;
+  }
+
+  // Clone enrolled grid for section
+  const eg2 = document.getElementById('enrolled-grid-2');
+  if (eg2 && user) {
+    const enrolled = (user.enrolled || []).map(id => BATCHES.find(b => b.id === id)).filter(Boolean);
+    if (!enrolled.length) {
+      eg2.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted);">No batches enrolled. <a href="batches.html" class="btn btn-primary btn-sm" style="margin-left:0.75rem;">Explore →</a></div>`;
+    } else {
+      eg2.innerHTML = enrolled.map(b => {
+        const progress = user.progress?.[b.slug] || {};
+        const done = Object.values(progress).filter(v => v === 'done').length;
+        const pct = Math.round((done / b.videos) * 100);
+        return `<a href="${getBatchUrl(b)}" class="enrolled-card">
+          <div class="enrolled-thumb"><div class="enrolled-thumb-bg" style="background:linear-gradient(135deg,${b.c1},${b.c2});position:absolute;inset:0;"></div><div class="enrolled-thumb-emoji">${b.emoji}</div></div>
+          <div class="enrolled-body">
+            <div class="enrolled-name">${b.name}</div>
+            <div class="enrolled-progress-label"><span>Progress</span><span>${pct}%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+          </div></a>`;
+      }).join('');
+    }
+  }
+});
+</script>
+</body>
+</html>

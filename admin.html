@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Elite Zone</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/community-admin.css">
+</head>
+<body class="admin-page">
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">⚡</div>
+    Elite<span>Zone</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="batches.html">Batches</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="admin.html" class="active" style="color:var(--pulse)">Admin ⚙️</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn btn-glass btn-sm" onclick="Auth.logout()">Sign Out</button>
+  </div>
+  <button class="nav-burger"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page-main">
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <div class="nav-logo">
+        <div class="nav-logo-icon" style="width:36px;height:36px;font-size:0.9rem;">⚡</div>
+        Elite<span style="color:var(--plasma-light);">Zone</span>
+      </div>
+      <div class="admin-badge">⚙️ Admin Panel</div>
+    </div>
+
+    <nav class="admin-nav">
+      <button class="admin-nav-item active" data-section="overview">
+        <span>📊</span> Overview
+      </button>
+      <button class="admin-nav-item" data-section="students">
+        <span>👥</span> Students
+      </button>
+      <button class="admin-nav-item" data-section="batches">
+        <span>📚</span> Manage Batches
+      </button>
+      <button class="admin-nav-item" data-section="upload">
+        <span>⬆️</span> Upload Content
+      </button>
+      <button class="admin-nav-item" data-section="announcements">
+        <span>📢</span> Announcements
+      </button>
+      <button class="admin-nav-item" data-section="analytics">
+        <span>📈</span> Analytics
+      </button>
+      <button class="admin-nav-item" data-section="settings">
+        <span>⚙️</span> Settings
+      </button>
+
+      <div style="margin-top:auto;padding:1rem 0.5rem 0.5rem;border-top:1px solid var(--glass-border);margin-top:2rem;">
+        <a href="index.html" class="admin-nav-item">
+          <span>🏠</span> Back to Site
+        </a>
+        <button class="admin-nav-item" onclick="Auth.logout()">
+          <span>🚪</span> Sign Out
+        </button>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="admin-main">
+
+    <div class="admin-header">
+      <div>
+        <div class="admin-title">Admin <span>Panel</span></div>
+        <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.2rem;">
+          Elite Zone · LND College · Full Control
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <span class="badge badge-pulse">⚙️ Admin Mode</span>
+        <button class="btn btn-primary btn-sm" onclick="Toast.show('Dashboard refreshed!','success')">🔄 Refresh</button>
+      </div>
+    </div>
+
+    <!-- OVERVIEW SECTION -->
+    <div id="admin-section-overview" class="admin-section">
+      <div class="admin-stats">
+        <div class="admin-stat">
+          <div class="admin-stat-icon">👥</div>
+          <div class="admin-stat-num" id="admin-stat-students">24</div>
+          <div class="admin-stat-label">Total Students</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat-icon">📚</div>
+          <div class="admin-stat-num" id="admin-stat-batches">20</div>
+          <div class="admin-stat-label">Active Batches</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat-icon">🎬</div>
+          <div class="admin-stat-num" id="admin-stat-enroll">156</div>
+          <div class="admin-stat-label">Enrollments</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat-icon">📈</div>
+          <div class="admin-stat-num" id="admin-stat-rate">87%</div>
+          <div class="admin-stat-label">Completion Rate</div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Row -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+        <div class="admin-form">
+          <h3 style="margin-bottom:1.25rem;">📢 Quick Announcement</h3>
+          <div class="form-group">
+            <label>Title</label>
+            <input class="input-field" id="ann-title" placeholder="Announcement title..." type="text">
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea class="input-field" id="ann-message" placeholder="Write your announcement..." style="min-height:80px;resize:none;"></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="sendAnnouncement()">📢 Send to All Students</button>
+        </div>
+
+        <div class="admin-form">
+          <h3 style="margin-bottom:1.25rem;">📊 Today's Summary</h3>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="display:flex;justify-content:space-between;padding:0.75rem;background:var(--void);border-radius:10px;">
+              <span style="font-size:0.85rem;color:var(--text-secondary);">New Registrations</span>
+              <span style="font-weight:700;color:var(--mint);">+3</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:0.75rem;background:var(--void);border-radius:10px;">
+              <span style="font-size:0.85rem;color:var(--text-secondary);">Videos Watched</span>
+              <span style="font-weight:700;color:var(--neon);">248</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:0.75rem;background:var(--void);border-radius:10px;">
+              <span style="font-size:0.85rem;color:var(--text-secondary);">Tests Attempted</span>
+              <span style="font-weight:700;color:var(--plasma-light);">18</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:0.75rem;background:var(--void);border-radius:10px;">
+              <span style="font-size:0.85rem;color:var(--text-secondary);">Community Posts</span>
+              <span style="font-weight:700;color:var(--gold);">89</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENTS SECTION -->
+    <div id="admin-section-students" class="admin-section" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;">👥 All Students</h2>
+        <div style="display:flex;gap:0.75rem;">
+          <input class="input-field" placeholder="Search students..." style="max-width:220px;padding:0.5rem 1rem;" type="text">
+          <button class="btn btn-primary btn-sm" onclick="Toast.show('Exporting student data...','success')">⬇ Export</button>
+        </div>
+      </div>
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Roll No.</th>
+              <th>Semester</th>
+              <th>Enrolled</th>
+              <th>XP</th>
+              <th>Joined</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="user-table-body">
+            <tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--text-muted);">Loading students...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BATCHES SECTION -->
+    <div id="admin-section-batches" class="admin-section" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;">📚 Manage Batches</h2>
+        <span class="badge badge-neon">20 Fixed Batches · Admin manages content only</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;" id="batch-manager-grid">
+        <div style="text-align:center;padding:3rem;color:var(--text-muted);">Loading batches...</div>
+      </div>
+    </div>
+
+    <!-- UPLOAD SECTION -->
+    <div id="admin-section-upload" class="admin-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;margin-bottom:1.5rem;">⬆️ Upload Content</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+
+        <!-- Upload Form -->
+        <div class="admin-form">
+          <h3>📤 Add New Content</h3>
+          <div class="form-group" style="margin-top:1.25rem;">
+            <label>Content Type</label>
+            <select class="form-select" id="upload-type">
+              <option value="">Select type...</option>
+              <option value="Video">Video Lecture</option>
+              <option value="Note">Study Note</option>
+              <option value="DPP">DPP Sheet</option>
+              <option value="Test">Test / Quiz</option>
+              <option value="Resource">Resource File</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Select Batch</label>
+            <select class="form-select" id="upload-batch-select">
+              <option value="">Choose batch...</option>
+              ${Array.isArray(typeof BATCHES !== 'undefined' ? BATCHES : []) ? '' : ''}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input class="input-field" id="upload-title" placeholder="Content title..." type="text">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="input-field" placeholder="Brief description..." style="min-height:70px;resize:none;"></textarea>
+          </div>
+          <div class="upload-zone" onclick="Toast.show('File picker opened!','info')">
+            <div class="upload-icon">📁</div>
+            <p>Drop file here or click to browse</p>
+            <span>MP4, PDF, ZIP — Max 500MB</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:1rem;" onclick="handleUpload()">⬆️ Upload Content</button>
+        </div>
+
+        <!-- Video URL Upload -->
+        <div class="admin-form">
+          <h3>🎬 Add Video via URL</h3>
+          <div style="margin-top:1.25rem;">
+            <div class="form-group">
+              <label>Select Batch</label>
+              <select class="form-select">
+                <option>Choose batch...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Lecture Title</label>
+              <input class="input-field" placeholder="Lecture 1: Introduction to C" type="text">
+            </div>
+            <div class="form-group">
+              <label>YouTube Video URL</label>
+              <input class="input-field" placeholder="https://youtube.com/watch?v=..." type="url">
+            </div>
+            <div class="form-group">
+              <label>Duration (e.g. 12:30)</label>
+              <input class="input-field" placeholder="00:00" type="text" style="max-width:120px;">
+            </div>
+            <div class="form-group">
+              <label>Lecture Number</label>
+              <input class="input-field" placeholder="1" type="number" style="max-width:120px;">
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="Toast.show('Video URL saved successfully!','success')">💾 Save Video</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div id="admin-section-announcements" class="admin-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;margin-bottom:1.5rem;">📢 Announcements</h2>
+      <div class="admin-form" style="max-width:600px;">
+        <h3>Send Announcement to All Students</h3>
+        <div style="margin-top:1.25rem;">
+          <div class="form-group">
+            <label>Announcement Title *</label>
+            <input class="input-field" id="ann-title-2" placeholder="e.g. New DSA videos added!" type="text">
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea class="input-field" id="ann-message-2" placeholder="Write your announcement..." style="min-height:120px;resize:none;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Type</label>
+            <select class="form-select">
+              <option>📢 General</option>
+              <option>🎬 New Content</option>
+              <option>📊 Test Scheduled</option>
+              <option>🚀 Feature Update</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="Toast.show('Announcement sent to all 5,247 students! 📢','success')">
+            📢 Send Announcement
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div id="admin-section-analytics" class="admin-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;margin-bottom:1.5rem;">📈 Analytics</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+        <div class="chart-placeholder" id="analytics-chart">Loading chart...</div>
+        <div class="chart-placeholder">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+            <span style="font-family:var(--font-display);font-weight:700;">Top Batches by Enrollment</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.65rem;flex:1;justify-content:center;">
+            ${[['DSA',89],['Web Dev',76],['Python',68],['React JS',54],['Placement',49]].map(([name, pct]) =>
+              `<div style="display:flex;align-items:center;gap:0.75rem;">
+                <div style="font-size:0.78rem;width:80px;flex-shrink:0;">${name}</div>
+                <div style="flex:1;height:8px;background:var(--glass);border-radius:4px;overflow:hidden;">
+                  <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--plasma),var(--neon));border-radius:4px;"></div>
+                </div>
+                <div style="font-size:0.72rem;color:var(--text-muted);width:30px;">${pct}%</div>
+              </div>`
+            ).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+        <div class="admin-stat">
+          <div class="admin-stat-icon">⏱️</div>
+          <div class="admin-stat-num">4.2h</div>
+          <div class="admin-stat-label">Avg. Daily Study Time</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat-icon">✅</div>
+          <div class="admin-stat-num">87%</div>
+          <div class="admin-stat-label">Test Pass Rate</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat-icon">🔥</div>
+          <div class="admin-stat-num">6.4</div>
+          <div class="admin-stat-label">Avg. Streak (days)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="admin-section-settings" class="admin-section" style="display:none;">
+      <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;margin-bottom:1.5rem;">⚙️ Platform Settings</h2>
+      <div class="admin-form" style="max-width:520px;">
+        <h3>Platform Configuration</h3>
+        <div style="margin-top:1.25rem;display:flex;flex-direction:column;gap:1rem;">
+          <div class="form-group">
+            <label>Platform Name</label>
+            <input class="input-field" value="Elite Zone" type="text">
+          </div>
+          <div class="form-group">
+            <label>College Name</label>
+            <input class="input-field" value="LND College" type="text">
+          </div>
+          <div class="form-group">
+            <label>Admin Email</label>
+            <input class="input-field" value="admin@elitezone.in" type="email">
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;">
+            <div>
+              <div style="font-weight:600;font-size:0.875rem;">Registration Open</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">Allow new student registrations</div>
+            </div>
+            <div style="width:44px;height:24px;background:var(--mint);border-radius:12px;position:relative;cursor:pointer;" onclick="Toast.show('Setting saved!','success')">
+              <div style="width:18px;height:18px;background:white;border-radius:50%;position:absolute;right:3px;top:3px;transition:all 0.2s;"></div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="Toast.show('Settings saved successfully!','success')">💾 Save Settings</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end admin-main -->
+</div><!-- end admin-layout -->
+</main>
+
+<script src="js/main.js"></script>
+<script src="js/community-admin.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Populate batch selects
+  document.querySelectorAll('.form-select, select').forEach(sel => {
+    if (sel.options.length <= 1 && (sel.options[0]?.text?.includes('Choose batch') || sel.options[0]?.text?.includes('batch'))) {
+      BATCHES.forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b.id; opt.textContent = `${b.emoji} ${b.name}`;
+        sel.appendChild(opt);
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>

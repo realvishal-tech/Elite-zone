@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Batches — Elite Zone</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/batches.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">⚡</div>
+    Elite<span>Zone</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="batches.html" class="active">Batches</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="admin.html" data-admin-link style="display:none;color:var(--pulse)">Admin</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a>
+  </div>
+  <button class="nav-burger"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page-main">
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="batches-hero">
+      <div class="section-label">All Courses</div>
+      <h1 class="section-title">20 Premium <span>Batches</span> Await You</h1>
+      <p class="section-sub" style="margin:1rem auto 0;text-align:center;">
+        From C basics to AI & Machine Learning — everything a BCA student needs, all in one place.
+      </p>
+      <div class="batches-search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="batch-search" placeholder="Search batches — C++, React, DSA, Python...">
+      </div>
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">⚡ All Batches</button>
+      <button class="filter-tab" data-filter="beginner">🌱 Beginner</button>
+      <button class="filter-tab" data-filter="intermediate">⚡ Intermediate</button>
+      <button class="filter-tab" data-filter="advanced">🔥 Advanced</button>
+      <button class="filter-tab" data-filter="web">🌐 Web Dev</button>
+      <button class="filter-tab" data-filter="interview">🎯 Interview</button>
+      <button class="filter-tab" data-filter="cs-core">💻 CS Core</button>
+      <button class="filter-tab" data-filter="ai">🤖 AI/ML</button>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="batches-toolbar">
+      <div class="batches-count" id="batch-count">Loading...</div>
+      <select class="sort-select" id="sort-select">
+        <option value="default">Sort: Default</option>
+        <option value="videos">Most Videos</option>
+        <option value="name">A - Z</option>
+        <option value="duration">Shortest First</option>
+      </select>
+    </div>
+
+    <!-- GRID -->
+    <div class="batches-main-grid" id="batches-main-grid">
+      <div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--text-muted);">
+        <div style="font-size:2rem;margin-bottom:0.75rem;animation:spin-slow 2s linear infinite;">⚡</div>
+        Loading batches...
+      </div>
+    </div>
+
+    <div style="height:3rem;"></div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="display:inline-flex;">
+        <div class="nav-logo-icon">⚡</div>
+        Elite<span>Zone</span>
+      </a>
+      <p>India's most premium BCA learning platform. Explore 20 curated batches and become industry ready.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Popular</h4>
+      <ul>
+        <li><a href="batch-detail.html?batch=dsa">DSA</a></li>
+        <li><a href="batch-detail.html?batch=web-development">Web Dev</a></li>
+        <li><a href="batch-detail.html?batch=react-js">React JS</a></li>
+        <li><a href="batch-detail.html?batch=python-development">Python</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="community.html">Ask a Doubt</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Elite Zone · LND College</span>
+    <span>Built with ❤️ by <strong>Vishal Kumar</strong></span>
+  </div>
+</footer>
+
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="index.html" class="mob-nav-item"><div class="icon">🏠</div>Home</a>
+    <a href="batches.html" class="mob-nav-item active"><div class="icon">📚</div>Batches</a>
+    <a href="community.html" class="mob-nav-item"><div class="icon">💬</div>Community</a>
+    <a href="dashboard.html" class="mob-nav-item"><div class="icon">📊</div>Dashboard</a>
+    <a href="#" onclick="Registration.showModal(true)" class="mob-nav-item"><div class="icon">👤</div>Profile</a>
+  </div>
+</nav>
+
+<script src="js/main.js"></script>
+<script src="js/batches.js"></script>
+</body>
+</html>

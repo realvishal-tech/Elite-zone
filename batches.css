@@ -1,0 +1,152 @@
+/* ===== ELITE ZONE — BATCHES PAGE ===== */
+
+.batches-hero {
+  padding: 4rem 0 3rem;
+  text-align: center;
+  position: relative;
+}
+
+.batches-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(108,63,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.batches-hero > * { position: relative; }
+
+.batches-search-bar {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 0.75rem 1.25rem;
+  max-width: 520px; margin: 2rem auto 0;
+  transition: border-color 0.2s;
+}
+.batches-search-bar:focus-within { border-color: var(--plasma); }
+.batches-search-bar input {
+  background: none; border: none; outline: none;
+  color: var(--text-primary); font-family: var(--font-body); font-size: 0.9rem;
+  flex: 1;
+}
+.batches-search-bar input::placeholder { color: var(--text-muted); }
+.search-icon { color: var(--text-muted); font-size: 1.1rem; }
+
+/* FILTER TABS */
+.filter-tabs {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin: 2rem 0 1.5rem;
+}
+
+.filter-tab {
+  padding: 0.45rem 1.1rem;
+  border-radius: 100px;
+  font-size: 0.82rem; font-weight: 500;
+  cursor: pointer; border: 1px solid var(--glass-border);
+  background: transparent; color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+.filter-tab:hover { border-color: var(--plasma); color: var(--plasma-light); }
+.filter-tab.active {
+  background: linear-gradient(135deg, var(--plasma), #4a1fff);
+  border-color: transparent; color: white;
+  box-shadow: 0 4px 15px var(--plasma-glow);
+}
+
+/* BATCHES MAIN GRID */
+.batches-main-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.batch-card-full {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+  text-decoration: none; color: inherit;
+  display: block;
+}
+
+.batch-card-full:hover {
+  border-color: rgba(108,63,255,0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 30px var(--plasma-glow);
+}
+
+.bcf-thumb {
+  height: 160px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  font-size: 4rem;
+}
+
+.bcf-thumb-bg {
+  position: absolute; inset: 0;
+  opacity: 0.9;
+}
+
+.bcf-thumb-emoji { position: relative; z-index: 1; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+
+.bcf-level {
+  position: absolute; top: 12px; right: 12px;
+  z-index: 2;
+}
+
+.bcf-body { padding: 1.25rem; }
+.bcf-name {
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.bcf-mentor { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.35rem; }
+.bcf-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 1rem; }
+
+.bcf-stats {
+  display: flex; gap: 1rem; padding: 0.85rem;
+  background: var(--void); border-radius: 10px; margin-bottom: 1rem;
+}
+
+.bcf-stat { text-align: center; flex: 1; }
+.bcf-stat-num { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--plasma-light); }
+.bcf-stat-label { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
+
+.bcf-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.bcf-duration { font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.3rem; }
+
+/* NO RESULTS */
+.no-results {
+  text-align: center; padding: 5rem 2rem; grid-column: 1/-1;
+}
+.no-results-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.no-results h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 0.5rem; }
+.no-results p { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* SORT BAR */
+.batches-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.batches-count { font-size: 0.85rem; color: var(--text-muted); }
+.batches-count span { color: var(--plasma-light); font-weight: 600; }
+
+.sort-select {
+  padding: 0.5rem 1rem;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 8px; color: var(--text-primary);
+  font-family: var(--font-body); font-size: 0.82rem;
+  outline: none; cursor: pointer;
+  appearance: none;
+}
+
+@media (max-width: 640px) {
+  .batches-toolbar { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+}

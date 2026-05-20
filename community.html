@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community — Elite Zone</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/community-admin.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">⚡</div>
+    Elite<span>Zone</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="batches.html">Batches</a></li>
+    <li><a href="community.html" class="active">Community</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="admin.html" data-admin-link style="display:none;color:var(--pulse)">Admin</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="dashboard.html" class="btn btn-glass btn-sm">Dashboard</a>
+  </div>
+  <button class="nav-burger"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page-main">
+<div class="community-layout">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="community-sidebar-left">
+
+    <!-- Rooms -->
+    <div class="comm-sidebar-card">
+      <h3>💬 Rooms</h3>
+      <div class="room-list">
+        <div class="room-item active" data-room="general">
+          <span class="room-icon">#</span>
+          <span>general</span>
+          <span class="room-count">247</span>
+        </div>
+        <div class="room-item" data-room="doubt">
+          <span class="room-icon">❓</span>
+          <span>doubt-help</span>
+          <span class="room-count">89</span>
+        </div>
+        <div class="room-item" data-room="projects">
+          <span class="room-icon">🚀</span>
+          <span>projects</span>
+          <span class="room-count">43</span>
+        </div>
+        <div class="room-item" data-room="placement">
+          <span class="room-icon">🎯</span>
+          <span>placement</span>
+          <span class="room-count">156</span>
+        </div>
+        <div class="room-item" data-room="announcements">
+          <span class="room-icon">📢</span>
+          <span>announcements</span>
+          <span class="room-count">12</span>
+        </div>
+        <div class="room-item" data-room="off-topic">
+          <span class="room-icon">🎮</span>
+          <span>off-topic</span>
+          <span class="room-count">31</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Batch Rooms -->
+    <div class="comm-sidebar-card">
+      <h3>📚 Batch Rooms</h3>
+      <div class="room-list">
+        <div class="room-item" data-room="dsa">
+          <span class="room-icon">🧩</span>
+          <span>DSA</span>
+        </div>
+        <div class="room-item" data-room="web">
+          <span class="room-icon">🕸️</span>
+          <span>Web Dev</span>
+        </div>
+        <div class="room-item" data-room="react">
+          <span class="room-icon">⚛️</span>
+          <span>React JS</span>
+        </div>
+        <div class="room-item" data-room="python">
+          <span class="room-icon">🐍</span>
+          <span>Python</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules Card -->
+    <div class="comm-sidebar-card">
+      <h3>📋 Community Rules</h3>
+      <div style="font-size:0.8rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.5rem;">
+        <div>1. Be respectful to all</div>
+        <div>2. No spam or self-promotion</div>
+        <div>3. Use code blocks for code</div>
+        <div>4. Help others when you can</div>
+        <div>5. Keep posts relevant</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- FEED -->
+  <div>
+    <!-- Feed Header -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+      <div>
+        <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;" id="room-heading"># general</h2>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">Discuss anything · Share tips · Ask doubts</p>
+      </div>
+      <div style="display:flex;gap:0.5rem;">
+        <button class="btn btn-glass btn-sm" onclick="Toast.show('Sorted by: Latest', 'info')">⏰ Latest</button>
+        <button class="btn btn-glass btn-sm" onclick="Toast.show('Sorted by: Popular', 'info')">🔥 Popular</button>
+      </div>
+    </div>
+
+    <!-- POST CREATOR -->
+    <div class="comm-post-creator" style="margin-bottom:1.25rem;">
+      <div class="post-creator-row">
+        <div class="post-creator-avatar" id="creator-avatar">EZ</div>
+        <textarea class="post-textarea" id="post-text" placeholder="Share your thoughts, ask a doubt, or help someone..."></textarea>
+      </div>
+      <div class="post-actions">
+        <div class="post-tools">
+          <button class="post-tool-btn" data-action="code">💻 Code</button>
+          <button class="post-tool-btn" data-action="image">🖼️ Image</button>
+          <button class="post-tool-btn" data-action="link">🔗 Link</button>
+        </div>
+        <button class="btn btn-primary btn-sm" id="post-submit">Post 🚀</button>
+      </div>
+    </div>
+
+    <!-- POSTS FEED -->
+    <div class="comm-feed" id="comm-feed">
+      <!-- Rendered by community.js -->
+      <div style="text-align:center;padding:3rem;color:var(--text-muted);">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">⚡</div>
+        Loading community...
+      </div>
+    </div>
+
+    <div style="height:2rem;"></div>
+  </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="community-sidebar-right">
+
+    <!-- Stats -->
+    <div class="comm-sidebar-card">
+      <h3>📊 Community Stats</h3>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <div style="display:flex;justify-content:space-between;">
+          <span style="font-size:0.85rem;color:var(--text-secondary);">Total Members</span>
+          <span style="font-weight:700;color:var(--plasma-light);">5,247</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="font-size:0.85rem;color:var(--text-secondary);">Online Now</span>
+          <span style="font-weight:700;color:var(--mint);">● 142</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="font-size:0.85rem;color:var(--text-secondary);">Posts Today</span>
+          <span style="font-weight:700;color:var(--gold);">89</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="font-size:0.85rem;color:var(--text-secondary);">Doubts Solved</span>
+          <span style="font-weight:700;color:var(--neon);">12,456</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Online Users -->
+    <div class="comm-sidebar-card">
+      <h3>🟢 Online Now</h3>
+      <div class="online-users" id="online-users">
+        <!-- Rendered by JS -->
+      </div>
+      <div style="margin-top:0.75rem;font-size:0.75rem;color:var(--text-muted);text-align:center;">
+        +137 more online
+      </div>
+    </div>
+
+    <!-- Top Contributors -->
+    <div class="comm-sidebar-card">
+      <h3>🏆 Top Helpers</h3>
+      <div style="display:flex;flex-direction:column;gap:0.65rem;">
+        <div style="display:flex;align-items:center;gap:0.65rem;">
+          <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#ff8c00);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;font-family:var(--font-display);">AS</div>
+          <div style="flex:1;"><div style="font-size:0.82rem;font-weight:600;">Arjun Singh</div><div style="font-size:0.7rem;color:var(--text-muted);">234 answers</div></div>
+          <span style="font-size:0.8rem;color:var(--gold);">🥇</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.65rem;">
+          <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--plasma));display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;font-family:var(--font-display);">PS</div>
+          <div style="flex:1;"><div style="font-size:0.82rem;font-weight:600;">Priya Sharma</div><div style="font-size:0.7rem;color:var(--text-muted);">189 answers</div></div>
+          <span style="font-size:0.8rem;color:var(--text-muted);">🥈</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.65rem;">
+          <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--mint),var(--neon));display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;font-family:var(--font-display);">RK</div>
+          <div style="flex:1;"><div style="font-size:0.82rem;font-weight:600;">Rahul Kumar</div><div style="font-size:0.7rem;color:var(--text-muted);">145 answers</div></div>
+          <span style="font-size:0.8rem;color:var(--text-muted);">🥉</span>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+</main>
+
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="index.html" class="mob-nav-item"><div class="icon">🏠</div>Home</a>
+    <a href="batches.html" class="mob-nav-item"><div class="icon">📚</div>Batches</a>
+    <a href="community.html" class="mob-nav-item active"><div class="icon">💬</div>Community</a>
+    <a href="dashboard.html" class="mob-nav-item"><div class="icon">📊</div>Dashboard</a>
+    <a href="#" onclick="Registration.showModal(true)" class="mob-nav-item"><div class="icon">👤</div>Profile</a>
+  </div>
+</nav>
+
+<script src="js/main.js"></script>
+<script src="js/community-admin.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Update post creator avatar
+  const user = Auth.getUser();
+  const creatorAvatar = document.getElementById('creator-avatar');
+  if (creatorAvatar && user) {
+    creatorAvatar.textContent = user.initials || user.name.slice(0,2).toUpperCase();
+    creatorAvatar.style.background = 'linear-gradient(135deg, var(--plasma), var(--pulse))';
+  }
+});
+</script>
+</body>
+</html>
